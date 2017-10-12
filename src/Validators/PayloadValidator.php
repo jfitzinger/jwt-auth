@@ -71,11 +71,11 @@ class PayloadValidator extends AbstractValidator
      */
     protected function validateTimestamps(array $payload)
     {
-        if (isset($payload['nbf']) && Utils::timestamp($payload['nbf'])->isFuture()) {
+        if (isset($payload['nbf']) && Utils::timestamp($payload['nbf']-2)->isFuture()) {
             throw new TokenInvalidException('Not Before (nbf) timestamp cannot be in the future', 400);
         }
 
-        if (isset($payload['iat']) && Utils::timestamp($payload['iat'])->isFuture()) {
+        if (isset($payload['iat']) && Utils::timestamp($payload['iat']-2)->isFuture()) {
             throw new TokenInvalidException('Issued At (iat) timestamp cannot be in the future', 400);
         }
 
